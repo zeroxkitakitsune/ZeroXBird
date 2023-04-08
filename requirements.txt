@@ -6,3 +6,4 @@ PyQt5-sip==12.11.1
 PyQt6==6.4.2
 PyQt6-sip==13.4.1
 PyQt6-WebEngine==6.4.0
+oauthlib==3.2.2
