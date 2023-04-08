@@ -111,11 +111,15 @@ def linkAccount():
             row += 1
 
 def importSessions():
+    
     global twitter
+    
     fileName, _ = QFileDialog.getOpenFileName(window, 'Single File', QDir.rootPath() , '*.json')
+    
     twitter.import_sessions(fileName)
     
     window.ui.linkedAccountsTableWidget.setRowCount(len(twitter.listAccounts))
+    
     row = 0
     for account in twitter.listAccounts:
         window.ui.linkedAccountsTableWidget.setItem(row,0,QTableWidgetItem(account['account']))
@@ -123,14 +127,18 @@ def importSessions():
         row += 1
 
 def exportSessions():
+    
     global twitter
+    
     twitter.export_sessions()
 
 def follow():
     global twitter
 
     follow_dialog = followDialog()
+    
     indexes = window.ui.linkedAccountsTableWidget.selectionModel().selectedRows()
+    
     button = follow_dialog.exec()
     if button == 1:
         names = []
@@ -142,7 +150,9 @@ def tweet():
     global twitter
     
     tweet_dialog = tweetDialog()
+    
     indexes = window.ui.linkedAccountsTableWidget.selectionModel().selectedRows()
+    
     button = tweet_dialog.exec()
     if button == 1:
         names = []
@@ -154,7 +164,9 @@ def retweet():
     global twitter
 
     retweet_dialog = retweetDialog()
+    
     indexes = window.ui.linkedAccountsTableWidget.selectionModel().selectedRows()
+    
     button = retweet_dialog.exec()
     if button == 1:
         names = []
@@ -163,7 +175,11 @@ def retweet():
         twitter.retweet(names, retweet_dialog.ui.rtText.toPlainText())
 
 def like():
+    
+    global twitter
+    
     like_dialog = likeDialog()
+    
     indexes = window.ui.linkedAccountsTableWidget.selectionModel().selectedRows()
     button = like_dialog.exec()
     if button == 1:
@@ -173,9 +189,13 @@ def like():
         twitter.like(names, like_dialog.ui.likeText.toPlainText())
 
 def delete():
+    
     global twitter
+    
     indexes = []
+    
     names = []
+    
     for model_index in window.ui.linkedAccountsTableWidget.selectionModel().selectedRows():
         index = QPersistentModelIndex(model_index)
         indexes.append(index)
