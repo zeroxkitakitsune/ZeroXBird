@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>695</width>
+    <height>654</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>TwitterPy v0</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../../.designer/backup/twitter.png</normaloff>../../../../.designer/backup/twitter.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="consumerKeyLabel">
+        <property name="text">
+         <string>Consumer key here</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="consumerSecretLabel">
+        <property name="text">
+         <string>Consumer secret here</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTableWidget" name="linkedAccountsTableWidget">
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::ExtendedSelection</enum>
+        </property>
+        <column>
+         <property name="text">
+          <string>Account</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Token</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="followBtn">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Follow</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="tweetBtn">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Tweet</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="retweetBtn">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Retweet</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="likeBtn">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Like</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="deleteBtn">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="addAPIBtn">
+        <property name="text">
+         <string>Add API</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="linkAccountBtn">
+        <property name="text">
+         <string>Link an account</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="importSessionsBtn">
+        <property name="text">
+         <string>Import Sessions</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="exportSessionsBtn">
+        <property name="text">
+         <string>Export Sessions</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>695</width>
+     <height>30</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
