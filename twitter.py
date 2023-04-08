@@ -1,7 +1,6 @@
 
-from requests_oauthlib import OAuth1Session, OAuth2Session
+from requests_oauthlib import OAuth1Session
 import sys, os, json, argparse
-from oauthlib.oauth2 import BackendApplicationClient
 import os
 import json
 import time
