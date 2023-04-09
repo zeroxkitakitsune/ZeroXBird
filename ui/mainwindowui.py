@@ -27,23 +27,20 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.consumerKeyLabel = QLabel(self.centralwidget)
-        self.consumerKeyLabel.setObjectName(u"consumerKeyLabel")
+        self.apisComboBox = QComboBox(self.centralwidget)
+        self.apisComboBox.setObjectName(u"apisComboBox")
 
-        self.verticalLayout.addWidget(self.consumerKeyLabel)
-
-        self.consumerSecretLabel = QLabel(self.centralwidget)
-        self.consumerSecretLabel.setObjectName(u"consumerSecretLabel")
-
-        self.verticalLayout.addWidget(self.consumerSecretLabel)
+        self.verticalLayout.addWidget(self.apisComboBox)
 
         self.linkedAccountsTableWidget = QTableWidget(self.centralwidget)
-        if (self.linkedAccountsTableWidget.columnCount() < 2):
-            self.linkedAccountsTableWidget.setColumnCount(2)
+        if (self.linkedAccountsTableWidget.columnCount() < 3):
+            self.linkedAccountsTableWidget.setColumnCount(3)
         __qtablewidgetitem = QTableWidgetItem()
         self.linkedAccountsTableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem)
         __qtablewidgetitem1 = QTableWidgetItem()
         self.linkedAccountsTableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        __qtablewidgetitem2 = QTableWidgetItem()
+        self.linkedAccountsTableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem2)
         self.linkedAccountsTableWidget.setObjectName(u"linkedAccountsTableWidget")
         self.linkedAccountsTableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.linkedAccountsTableWidget.setSelectionMode(QAbstractItemView.ExtendedSelection)
@@ -128,13 +125,13 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"TwitterPy v0", None))
-        self.consumerKeyLabel.setText(QCoreApplication.translate("MainWindow", u"Consumer key here", None))
-        self.consumerSecretLabel.setText(QCoreApplication.translate("MainWindow", u"Consumer secret here", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"ZeroXTwitter v0 by 0xkitakitsune", None))
         ___qtablewidgetitem = self.linkedAccountsTableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Account", None));
         ___qtablewidgetitem1 = self.linkedAccountsTableWidget.horizontalHeaderItem(1)
         ___qtablewidgetitem1.setText(QCoreApplication.translate("MainWindow", u"Token", None));
+        ___qtablewidgetitem2 = self.linkedAccountsTableWidget.horizontalHeaderItem(2)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("MainWindow", u"Proxy", None));
         self.followBtn.setText(QCoreApplication.translate("MainWindow", u"Follow", None))
         self.tweetBtn.setText(QCoreApplication.translate("MainWindow", u"Tweet", None))
         self.retweetBtn.setText(QCoreApplication.translate("MainWindow", u"Retweet", None))

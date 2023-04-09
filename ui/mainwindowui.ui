@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>TwitterPy v0</string>
+   <string>ZeroXTwitter v0 by 0xkitakitsune</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -22,18 +22,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="consumerKeyLabel">
-        <property name="text">
-         <string>Consumer key here</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="consumerSecretLabel">
-        <property name="text">
-         <string>Consumer secret here</string>
-        </property>
-       </widget>
+       <widget class="QComboBox" name="apisComboBox"/>
       </item>
       <item>
        <widget class="QTableWidget" name="linkedAccountsTableWidget">
@@ -51,6 +40,11 @@
         <column>
          <property name="text">
           <string>Token</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Proxy</string>
          </property>
         </column>
        </widget>

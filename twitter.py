@@ -7,17 +7,24 @@ import time
 
 class Twitter:
 
-    listAccounts = []
-    sessions = []
+    # listAccounts = []
+    # sessions = []
 
-    def __init__(self, consumer_key, consumer_secret):
+    def __init__(self, consumer_key, consumer_secret, proxy):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
+        self.proxy = proxy
+        self.listAccounts = []
+        self.sessions = []
 
     @staticmethod
-    def check_api(consumer_key, client_secret):
+    def check_api(consumer_key, client_secret, proxy):
         request_token_url = "https://api.twitter.com/oauth/request_token?oauth_callback=oob&x_auth_access_type=write"
         oauth = OAuth1Session(consumer_key, client_secret)
+        oauth.proxies = {
+            'http': proxy,
+            'https': proxy
+        }
 
         try:
             fetch_response = oauth.fetch_request_token(request_token_url)
@@ -28,11 +35,15 @@ class Twitter:
             )
             return False
 
-    def get_authorize_url(self):
+    def get_authorize_url(self, proxy):
         request_token_url = "https://api.twitter.com/oauth/request_token?oauth_callback=oob&x_auth_access_type=write"
 
         oauth = OAuth1Session(self.consumer_key, client_secret=self.consumer_secret)  
-        
+        oauth.proxies = {
+            'http': proxy,
+            'https': proxy
+        } 
+
         try:
             fetch_response = oauth.fetch_request_token(request_token_url) # try with proxies here
         except ValueError:
@@ -42,15 +53,13 @@ class Twitter:
 
         self.resource_owner_key = fetch_response.get("oauth_token")
         self.resource_owner_secret = fetch_response.get("oauth_token_secret")
-
-        print("Got OAuth token: %s" % self.resource_owner_key)
         
         # Get authorization
         base_authorization_url = "https://api.twitter.com/oauth/authorize"
         authorization_url = oauth.authorization_url(base_authorization_url)
         return authorization_url
 
-    def link_account(self, verifier):
+    def link_account(self, verifier, proxy):
 
         # Get the access token
         access_token_url = "https://api.twitter.com/oauth/access_token"
@@ -73,6 +82,11 @@ class Twitter:
             resource_owner_key=access_token,
             resource_owner_secret=access_token_secret,
         )
+        
+        oauth.proxies = {
+            'http': proxy,
+            'https': proxy
+        }
 
         response = oauth.get("https://api.twitter.com/2/users/me", params={"user.fields": "created_at,description,username"})
         
@@ -87,29 +101,35 @@ class Twitter:
         
         info_to_serialize = {
             'resource_owner_key': access_token,
-            'resource_owner_secret': access_token_secret
+            'resource_owner_secret': access_token_secret,
+            'proxy': proxy
         }
 
         self.sessions.append(info_to_serialize)
 
     def export_sessions(self):
-        ofile = open('sessions.json', 'w')
+        ofile = open(f'{self.consumer_key}.json', 'w')
         sessions_final = json.dumps(self.sessions)
         ofile.write(sessions_final)
-        print("Updated sessions.json")
+        print(f"Updated {self.consumer_key}.json")
     
     def import_sessions(self, fileName):
         
         with open(fileName, 'r') as j:
             sessions = json.loads(j.read())
 
-        for index, session in enumerate(sessions):
+        for session in sessions:
             oauth = OAuth1Session(
                 self.consumer_key,
                 client_secret=self.consumer_secret,
                 resource_owner_key=session['resource_owner_key'],
                 resource_owner_secret=session['resource_owner_secret'],
             )
+
+            oauth.proxies = {
+                'http': session['proxy'],
+                'https': session['proxy']
+            }
             response = oauth.get("https://api.twitter.com/2/users/me", params={"user.fields": "created_at,description,username"})
         
             if response.status_code != 200:
@@ -133,7 +153,6 @@ class Twitter:
             # Making the request
             account = account["oauth"]
             token = account.token["oauth_token"]
-
             response = account.get(f"https://api.twitter.com/2/users/by?usernames={username}")
             if response.status_code != 200:
                 raise Exception(
