@@ -96,7 +96,7 @@ class Twitter:
         
         json_response = response.json()
 
-        self.listAccounts.append({"account": json_response['data']['username'], "oauth": oauth, 'proxy': proxy})
+        self.listAccounts.append({"account": json_response['data']['username'], "oauth": oauth})
         
         info_to_serialize = {
             'resource_owner_key': access_token,
@@ -138,7 +138,7 @@ class Twitter:
         
             json_response = response.json()
             
-            self.listAccounts.append({"account": json_response['data']['username'], "oauth": oauth, 'proxy': session['proxy']})
+            self.listAccounts.append({"account": json_response['data']['username'], "oauth": oauth})
     
     def follow(self, names, username):
 
@@ -152,7 +152,6 @@ class Twitter:
             # Making the request
             account = account["oauth"]
             token = account.token["oauth_token"]
-
             response = account.get(f"https://api.twitter.com/2/users/by?usernames={username}")
             if response.status_code != 200:
                 raise Exception(

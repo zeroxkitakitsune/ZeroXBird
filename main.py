@@ -122,7 +122,7 @@ def linkAccount():
             for account in twitter.listAccounts:
                 window.ui.linkedAccountsTableWidget.setItem(row,0,QTableWidgetItem(account['account']))
                 window.ui.linkedAccountsTableWidget.setItem(row,1,QTableWidgetItem(account['oauth'].token['oauth_token']))
-                window.ui.linkedAccountsTableWidget.setItem(row,2,QTableWidgetItem(account['proxy']))
+                window.ui.linkedAccountsTableWidget.setItem(row,2,QTableWidgetItem(account['oauth'].proxies['https']))
                 row += 1
 
 def importSessions():
@@ -139,7 +139,7 @@ def importSessions():
     for account in twitter.listAccounts:
         window.ui.linkedAccountsTableWidget.setItem(row,0,QTableWidgetItem(account['account']))
         window.ui.linkedAccountsTableWidget.setItem(row,1,QTableWidgetItem(account['oauth'].token['oauth_token']))
-        window.ui.linkedAccountsTableWidget.setItem(row,2,QTableWidgetItem(account['proxy']))
+        window.ui.linkedAccountsTableWidget.setItem(row,2,QTableWidgetItem(account['oauth'].proxies['https']))
         row += 1
 
 def exportSessions():
