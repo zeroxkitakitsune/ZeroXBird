@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>TwitterPy v0</string>
+   <string>ZeroXTwitter v0 by 0xkitakitsune</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -24,14 +24,21 @@
       <item>
        <widget class="QLabel" name="consumerKeyLabel">
         <property name="text">
-         <string>Consumer key here</string>
+         <string>Consumer key:</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="consumerSecretLabel">
         <property name="text">
-         <string>Consumer secret here</string>
+         <string>Consumer secret:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="proxyLabel">
+        <property name="text">
+         <string>Proxy: </string>
         </property>
        </widget>
       </item>
@@ -51,6 +58,11 @@
         <column>
          <property name="text">
           <string>Token</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Proxy</string>
          </property>
         </column>
        </widget>
