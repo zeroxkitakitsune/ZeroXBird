@@ -7,9 +7,6 @@ import time
 
 class Twitter:
 
-    # listAccounts = []
-    # sessions = []
-
     def __init__(self, consumer_key, consumer_secret, proxy):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
