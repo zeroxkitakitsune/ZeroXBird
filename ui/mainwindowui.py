@@ -27,20 +27,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.consumerKeyLabel = QLabel(self.centralwidget)
-        self.consumerKeyLabel.setObjectName(u"consumerKeyLabel")
+        self.apisComboBox = QComboBox(self.centralwidget)
+        self.apisComboBox.setObjectName(u"apisComboBox")
 
-        self.verticalLayout.addWidget(self.consumerKeyLabel)
-
-        self.consumerSecretLabel = QLabel(self.centralwidget)
-        self.consumerSecretLabel.setObjectName(u"consumerSecretLabel")
-
-        self.verticalLayout.addWidget(self.consumerSecretLabel)
-
-        self.proxyLabel = QLabel(self.centralwidget)
-        self.proxyLabel.setObjectName(u"proxyLabel")
-
-        self.verticalLayout.addWidget(self.proxyLabel)
+        self.verticalLayout.addWidget(self.apisComboBox)
 
         self.linkedAccountsTableWidget = QTableWidget(self.centralwidget)
         if (self.linkedAccountsTableWidget.columnCount() < 3):
@@ -136,9 +126,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"ZeroXTwitter v0 by 0xkitakitsune", None))
-        self.consumerKeyLabel.setText(QCoreApplication.translate("MainWindow", u"Consumer key:", None))
-        self.consumerSecretLabel.setText(QCoreApplication.translate("MainWindow", u"Consumer secret:", None))
-        self.proxyLabel.setText(QCoreApplication.translate("MainWindow", u"Proxy: ", None))
         ___qtablewidgetitem = self.linkedAccountsTableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"Account", None));
         ___qtablewidgetitem1 = self.linkedAccountsTableWidget.horizontalHeaderItem(1)

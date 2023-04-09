@@ -22,25 +22,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="consumerKeyLabel">
-        <property name="text">
-         <string>Consumer key:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="consumerSecretLabel">
-        <property name="text">
-         <string>Consumer secret:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="proxyLabel">
-        <property name="text">
-         <string>Proxy: </string>
-        </property>
-       </widget>
+       <widget class="QComboBox" name="apisComboBox"/>
       </item>
       <item>
        <widget class="QTableWidget" name="linkedAccountsTableWidget">
