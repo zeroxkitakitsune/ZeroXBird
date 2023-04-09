@@ -7,12 +7,15 @@ import time
 
 class Twitter:
 
-    listAccounts = []
-    sessions = []
+    # listAccounts = []
+    # sessions = []
 
-    def __init__(self, consumer_key, consumer_secret):
+    def __init__(self, consumer_key, consumer_secret, proxy):
         self.consumer_key = consumer_key
         self.consumer_secret = consumer_secret
+        self.proxy = proxy
+        self.listAccounts = []
+        self.sessions = []
 
     @staticmethod
     def check_api(consumer_key, client_secret, proxy):
@@ -50,8 +53,6 @@ class Twitter:
 
         self.resource_owner_key = fetch_response.get("oauth_token")
         self.resource_owner_secret = fetch_response.get("oauth_token_secret")
-
-        print("Got OAuth token: %s" % self.resource_owner_key)
         
         # Get authorization
         base_authorization_url = "https://api.twitter.com/oauth/authorize"
@@ -107,10 +108,10 @@ class Twitter:
         self.sessions.append(info_to_serialize)
 
     def export_sessions(self):
-        ofile = open('sessions.json', 'w')
+        ofile = open(f'{self.consumer_key}.json', 'w')
         sessions_final = json.dumps(self.sessions)
         ofile.write(sessions_final)
-        print("Updated sessions.json")
+        print(f"Updated {self.consumer_key}.json")
     
     def import_sessions(self, fileName):
         
