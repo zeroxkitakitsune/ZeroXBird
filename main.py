@@ -12,6 +12,7 @@ from ui.followui import Ui_followDialog
 from ui.tweetui import Ui_tweetDialog
 from ui.retweetui import Ui_retweetDialog
 from ui.likeui import Ui_likeDialog
+from ui.proxyui import Ui_proxyDialog
 
 CONSUMER_KEY = ''
 CONSUMER_SECRET = ''
@@ -25,6 +26,7 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         self.ui.linkedAccountsTableWidget.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
         self.ui.linkedAccountsTableWidget.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
+        self.ui.linkedAccountsTableWidget.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
         self.ui.linkedAccountsTableWidget.setSelectionBehavior(QTableView.SelectRows)
         self.ui.linkedAccountsTableWidget.selectionModel().selectionChanged.connect(enableBtns)
 
@@ -64,6 +66,12 @@ class likeDialog(QDialog):
         self.ui = Ui_likeDialog()
         self.ui.setupUi(self)
 
+class proxyDialog(QDialog):
+    def __init__(self):
+        super(proxyDialog, self).__init__()
+        self.ui = Ui_proxyDialog()
+        self.ui.setupUi(self)
+
 def enableBtns(selected, deselected):
     window.ui.followBtn.setEnabled(True)
     window.ui.tweetBtn.setEnabled(True)
@@ -75,40 +83,47 @@ def addAPI():
     global twitter
     global CONSUMER_KEY
     global CONSUMER_SECRET
-    add_api_key_dialog = addAPIDialog()
-    button = add_api_key_dialog.exec()
-    if button == 1:
-        CONSUMER_KEY = add_api_key_dialog.ui.consumerKeyText.toPlainText()
-        CONSUMER_SECRET = add_api_key_dialog.ui.consumerSecretText.toPlainText()
+    proxy_dialog = proxyDialog()
+    proxyBtn = proxy_dialog.exec()
+    if proxyBtn == 1:
+        proxy = proxy_dialog.ui.proxyText.toPlainText()
+        add_api_key_dialog = addAPIDialog()
+        button = add_api_key_dialog.exec()
+        if button == 1:
+            CONSUMER_KEY = add_api_key_dialog.ui.consumerKeyText.toPlainText()
+            CONSUMER_SECRET = add_api_key_dialog.ui.consumerSecretText.toPlainText()
 
-        if Twitter.check_api(CONSUMER_KEY, CONSUMER_SECRET) == True:
-            twitter = Twitter(CONSUMER_KEY, CONSUMER_SECRET)
-            print("correct")
-        else:
-            print("false")
-        
-        window.ui.consumerKeyLabel.setText(f"Consumer Key: {CONSUMER_KEY}")
-        window.ui.consumerSecretLabel.setText(f"Consumer Secret: {CONSUMER_SECRET}")
+            if Twitter.check_api(CONSUMER_KEY, CONSUMER_SECRET, proxy) == True:
+                twitter = Twitter(CONSUMER_KEY, CONSUMER_SECRET)
+                print("correct")
+            else:
+                print("false")
+            
+            window.ui.consumerKeyLabel.setText(f"Consumer Key: {CONSUMER_KEY}")
+            window.ui.consumerSecretLabel.setText(f"Consumer Secret: {CONSUMER_SECRET}")
+            window.ui.proxyLabel.setText(f"Proxy: {proxy}")
 
 def linkAccount():
     
     global twitter
     
     link_an_account_dialog = linkAnAccountDialog()
-
-    authorization_url = twitter.get_authorize_url()
-
-    link_an_account_dialog.ui.authrorizeText.insertPlainText(authorization_url)
-
-    button = link_an_account_dialog.exec()
-    if button == 1:
-        twitter.link_account(link_an_account_dialog.ui.pinText.toPlainText())
-        window.ui.linkedAccountsTableWidget.setRowCount(len(twitter.listAccounts))
-        row = 0
-        for account in twitter.listAccounts:
-            window.ui.linkedAccountsTableWidget.setItem(row,0,QTableWidgetItem(account['account']))
-            window.ui.linkedAccountsTableWidget.setItem(row,1,QTableWidgetItem(account['oauth'].token['oauth_token']))
-            row += 1
+    proxy_dialog = proxyDialog()
+    proxyBtn = proxy_dialog.exec()
+    if proxyBtn == 1:
+        proxy = proxy_dialog.ui.proxyText.toPlainText()
+        authorization_url = twitter.get_authorize_url(proxy)
+        link_an_account_dialog.ui.authrorizeText.insertPlainText(authorization_url)
+        button = link_an_account_dialog.exec()
+        if button == 1:
+            twitter.link_account(link_an_account_dialog.ui.pinText.toPlainText(), proxy)
+            window.ui.linkedAccountsTableWidget.setRowCount(len(twitter.listAccounts))
+            row = 0
+            for account in twitter.listAccounts:
+                window.ui.linkedAccountsTableWidget.setItem(row,0,QTableWidgetItem(account['account']))
+                window.ui.linkedAccountsTableWidget.setItem(row,1,QTableWidgetItem(account['oauth'].token['oauth_token']))
+                window.ui.linkedAccountsTableWidget.setItem(row,2,QTableWidgetItem(account['proxy']))
+                row += 1
 
 def importSessions():
     
@@ -124,6 +139,7 @@ def importSessions():
     for account in twitter.listAccounts:
         window.ui.linkedAccountsTableWidget.setItem(row,0,QTableWidgetItem(account['account']))
         window.ui.linkedAccountsTableWidget.setItem(row,1,QTableWidgetItem(account['oauth'].token['oauth_token']))
+        window.ui.linkedAccountsTableWidget.setItem(row,2,QTableWidgetItem(account['proxy']))
         row += 1
 
 def exportSessions():
