@@ -184,7 +184,7 @@ class Twitter:
                 "https://api.twitter.com/2/tweets",
                 json=payload
             )
-            if response.status_code != 200:
+            if response.status_code != 201:
                 raise Exception(
                     "Request returned an error: {} {}".format(response.status_code, response.text)
                 )

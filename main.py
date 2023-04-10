@@ -214,7 +214,7 @@ def delete():
     
     for model_index in window.ui.linkedAccountsTableWidget.selectionModel().selectedRows():
         i = QPersistentModelIndex(model_index)
-        indexes.append(i)
+        rows.append(i)
 
     for row in fows:
         names.append(window.ui.linkedAccountsTableWidget.model().data(window.ui.linkedAccountsTableWidget.model().index(row.row(), 0)))
