@@ -4,6 +4,7 @@ import sys, os, json, argparse
 import os
 import json
 import time
+import random
 
 class Twitter:
 
@@ -189,7 +190,7 @@ class Twitter:
                     "Request returned an error: {} {}".format(response.status_code, response.text)
                 )
 
-    def retweet(self, names, link):
+    def retweet(self, names, link, pause):
 
         tweetid = ""
         for c in link:
@@ -205,6 +206,7 @@ class Twitter:
                    accounts_to_use.append(account) 
         
         for account in accounts_to_use:
+            
             account = account["oauth"]
             token = account.token["oauth_token"]
             id = token[0:19]
@@ -215,6 +217,8 @@ class Twitter:
                 raise Exception(
                     "Request returned an error: {} {}".format(response.status_code, response.text)
                 )
+            if pause:
+                time.sleep(random.randint(1, 60))
 
     def like(self, names, link):
 

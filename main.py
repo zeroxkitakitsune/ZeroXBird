@@ -186,7 +186,11 @@ def retweet():
         names = []
         for row in rows:
             names.append(window.ui.linkedAccountsTableWidget.model().data(window.ui.linkedAccountsTableWidget.model().index(row.row(), 0)))
-        twitters[index].retweet(names, retweet_dialog.ui.rtText.toPlainText())
+        if retweet_dialog.ui.pauseCheckBox.isChecked():
+            twitters[index].retweet(names, retweet_dialog.ui.rtText.toPlainText(), True)
+        else:
+            twitters[index].retweet(names, retweet_dialog.ui.rtText.toPlainText(), False)
+
 
 def like():
     
