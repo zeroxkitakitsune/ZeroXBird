@@ -34,6 +34,11 @@ class Ui_retweetDialog(object):
 
         self.verticalLayout.addWidget(self.rtText)
 
+        self.pauseCheckBox = QCheckBox(retweetDialog)
+        self.pauseCheckBox.setObjectName(u"pauseCheckBox")
+
+        self.verticalLayout.addWidget(self.pauseCheckBox)
+
         self.buttonBox = QDialogButtonBox(retweetDialog)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setOrientation(Qt.Horizontal)
@@ -52,5 +57,6 @@ class Ui_retweetDialog(object):
     def retranslateUi(self, retweetDialog):
         retweetDialog.setWindowTitle(QCoreApplication.translate("retweetDialog", u"Retweet", None))
         self.retweetLabel.setText(QCoreApplication.translate("retweetDialog", u"Paste tweet link to retweet ", None))
+        self.pauseCheckBox.setText(QCoreApplication.translate("retweetDialog", u"Add random pause retweets between (1 - 60 seconds) ", None))
     # retranslateUi
 

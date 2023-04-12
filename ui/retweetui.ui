@@ -35,6 +35,13 @@
     <widget class="QTextEdit" name="rtText"/>
    </item>
    <item>
+    <widget class="QCheckBox" name="pauseCheckBox">
+     <property name="text">
+      <string>Add random pause retweets between (1 - 60 seconds) </string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
