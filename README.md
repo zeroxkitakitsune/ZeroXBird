@@ -1,5 +1,5 @@
-# ZeroXTwitter
-A tool to manage twitter accounts
+# ZeroXBird
+A tool to manage bird accounts
 
 ![readme](https://user-images.githubusercontent.com/108195681/230823426-6172cb85-f965-4b32-be8a-b859bff599ad.png)
 
@@ -17,7 +17,7 @@ $ python -m PyInstaller --onefile -w main.py
 3. Locate the file in `/dist` folder and run it
 4. Add API and link an account 
 ## Features
-- This app works only with official Twitter API. You can apply for one on Twitter's Developer Porttal.
+- This app works only with official Bird API. You can apply for one on Twitter's Developer Porttal.
 - There are two types of APIs: free and paid one. 
     - With free subscription you can only tweet from the app
     - With paid one you can pretty much do anything:
